@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+          margin: 0;
+          padding: 0;
+        }
+        #map {
+          width: 100vw;
+          height: 100vh;
+        }
+        .custom-icon {
+            border:2px solid #ff5e5e;
+            background-color: white;
+            color: black;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 16px;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+
+        // Inisialisasi peta
+        var map = L.map('map').setView([50.505, 30.57], 13); // Koordinat Kyiv, Zoom 13
+
+        // Menambahkan tile layer dari OpenStreetMap
+        L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            attribution: 'Map data &copy; <a href="https://www.google.com/maps">Google</a>',
+        }).addTo(map);
+
+        var textIcon = L.divIcon({
+            className: 'custom-icon',
+            html: '2',
+            iconSize: [25, 25],
+        });
+
+        // Menambahkan marker
+        var myIcon = L.icon({
+            iconUrl: 'circle.png',
+            iconSize: [95, 95],
+        });
+        L.marker([50.505, 30.57], {icon: textIcon}, {alt: 'Kyiv'}).addTo(map).bindPopup('Kyiv, Ukraine is the birthplace of Leaflet!');
+        L.marker([23.505, 20.57], {icon: myIcon}, {alt: 'Kyiv'}).addTo(map).bindPopup('Kyiv, Ukraine is the birthplace of Leaflet!');
+    
+    </script>
+</body>
+</html>
